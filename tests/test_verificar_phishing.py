@@ -11,19 +11,13 @@ sys.path.append(backend_path)
 # Importa a função verificar_phishing do arquivo app.py
 from app import verificar_phishing
 
-# Testes
-def test_verificar_phishing_encontra_palavra_chave():
-    email_content = "Este é um e-mail urgente que requer atenção imediata."
-    palavra_chave = "urgente"
-
+# Testes para verificar_phishing
+@pytest.mark.parametrize("email_content, palavra_chave, esperado", [
+    ("Este é um e-mail urgente que requer atenção imediata.", "urgente", True),
+    ("Este é um e-mail normal, sem urgência.", "urgente", False),
+    ("E-mail com a palavra-chave confidencial", "confidencial", True),
+    ("Outro e-mail sem termos suspeitos", "confidencial", False),
+])
+def test_verificar_phishing(email_content, palavra_chave, esperado):
     resultado = verificar_phishing(email_content, palavra_chave)
-
-    assert resultado == True  # Esperamos que a palavra-chave "urgente" seja encontrada no e-mail
-
-def test_verificar_phishing_nao_encontra_palavra_chave():
-    email_content = "Este é um e-mail normal, sem urgência."
-    palavra_chave = "urgente"
-
-    resultado = verificar_phishing(email_content, palavra_chave)
-
-    assert resultado == False  # Não esperamos que a palavra-chave "urgente" seja encontrada no e-mail
+    assert resultado == esperado
