@@ -8,6 +8,8 @@ backend_path = os.path.abspath(os.path.join(os.path.dirname(__file__), '../backe
 # Adiciona o caminho do backend ao sys.path
 sys.path.append(backend_path)
 
+from flask import Flask
+
 # Importa a função verificar_phishing do arquivo app.py
 from app import verificar_phishing
 
