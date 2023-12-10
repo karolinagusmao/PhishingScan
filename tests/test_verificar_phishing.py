@@ -1,14 +1,13 @@
 import sys
 import os
 import pytest
+import Flask
 
 # Obtém o caminho para o diretório do backend (um nível acima do diretório do teste)
 backend_path = os.path.abspath(os.path.join(os.path.dirname(__file__), '../backend'))
 
 # Adiciona o caminho do backend ao sys.path
 sys.path.append(backend_path)
-
-from flask import Flask
 
 # Importa a função verificar_phishing do arquivo app.py
 from app import verificar_phishing
